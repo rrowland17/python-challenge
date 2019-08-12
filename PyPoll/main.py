@@ -35,8 +35,8 @@ with open(poll_csv,'r') as csvfile:
             Li_votes += 1
         else:
             Tooley_votes += 1
-         Khan_percent = percentages(Khan_votes,vote_total)
-         
+    
+    Khan_percent = percentages(Khan_votes,vote_total)     
     Li_percent = percentages(Li_votes,vote_total)
     Correy_percent = percentages(Correy_votes,vote_total)
     Tooley_percent = percentages(Tooley_votes,vote_total)
