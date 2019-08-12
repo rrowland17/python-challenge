@@ -74,6 +74,7 @@ with open (output,"w") as new:
     new.write(f"Li: {Li_percent:.03f}% ({Li_votes})")
     new.write("\n")
     new.write(f"O'Tooley: {Tooley_percent:.03f}% ({Tooley_votes})")
+    new.write("\n")
     new.write("-------------------------")
     new.write("\n")
     new.write(f"Winner: {winner_name}")
