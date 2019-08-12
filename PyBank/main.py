@@ -6,11 +6,12 @@ bank_csv = os.path.join('..','PyBank','Resources','budget_data.csv')
 with open(bank_csv,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     header = next(csvreader)
-
+    
     #set variables to zero and create empty lists
     months_total = 0 
     total_profit = 0
-    previous_change = float(first_row[1])
+    net_change = 0
+    previous_change = 0
     net_change_list = []
     month_list = []
     greatest_inc = []
@@ -22,21 +23,26 @@ with open(bank_csv,'r') as csvfile:
         #sum of second row, needs to be cast to a float
         total_profit = total_profit + float(row[1])   
         #finding avg. change of profit
-        net_change = float(row[1]) - previous_change
+        #if statement to skip the first month
+        if months_total > 1:
+            net_change = float(row[1]) - previous_change
+            net_change_list = net_change_list + [net_change]
+            
+            #finding greatest increase and decrease
+            greatest_inc = max(net_change_list)
+            greatest_dec = min(net_change_list)
+            
         previous_change = float(row[1])
-        net_change_list = net_change_list + [net_change]
         month_list = month_list + [row[0]]
+
     
-        #finding greatest increase and decrease
-        greatest_inc = max(net_change_list)
-        greatest_dec = min(net_change_list)
+    avg_change = sum(net_change_list) / (len(net_change_list))
     
-    avg_change = sum(net_change_list) / (len(net_change_list) - 1)
 
 print("Financial Analysis")
 print("-------------------------------")
 print(f"Total Months: {months_total}")
-print(f"Total: ${total_profit}")
-print(f"Average Change: ${avg_change}")
-print(f"Greatest Increase in Profits: (${greatest_inc})")
-print(f"Greatest Decrease in Profits: (${greatest_dec})")    
+print(f"Total: ${total_profit:.0f}")
+print(f"Average Change: ${avg_change:.2f}")
+print(f"Greatest Increase in Profits: (${greatest_inc:.0f})")
+print(f"Greatest Decrease in Profits: (${greatest_dec:.0f})")
