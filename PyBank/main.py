@@ -50,7 +50,8 @@ print(f"Average Change: ${avg_change:.2f}")
 print(f"Greatest Increase in Profits: {month_list[greatest_inc_month]} (${(str(greatest_inc))})")
 print(f"Greatest Decrease in Profits: {month_list[greatest_dec_month]} (${(str(greatest_dec))})")
 
-output = output.text
+output = os.path.join("python-challenge", "PyBank", "Summary.txt")
+
 with open (output,"w") as new:
     new.write("Financial Analysis")
     new.write("\n")
