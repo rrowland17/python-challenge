@@ -30,8 +30,11 @@ with open(bank_csv,'r') as csvfile:
             
             #finding greatest increase and decrease
             greatest_inc = max(net_change_list)
+            greatest_inc_month = net_change_list.index(max(net_change_list))+1
+
             greatest_dec = min(net_change_list)
-            
+            greatest_dec_month = net_change_list.index(min(net_change_list))+1
+
         previous_change = float(row[1])
         month_list = month_list + [row[0]]
 
@@ -44,5 +47,21 @@ print("-------------------------------")
 print(f"Total Months: {months_total}")
 print(f"Total: ${total_profit:.0f}")
 print(f"Average Change: ${avg_change:.2f}")
-print(f"Greatest Increase in Profits: (${greatest_inc:.0f})")
-print(f"Greatest Decrease in Profits: (${greatest_dec:.0f})")
+print(f"Greatest Increase in Profits: {month_list[greatest_inc_month]} (${(str(greatest_inc))})")
+print(f"Greatest Decrease in Profits: {month_list[greatest_dec_month]} (${(str(greatest_dec))})")
+
+output = output.text
+with open (output,"w") as new:
+    new.write("Financial Analysis")
+    new.write("\n")
+    new.write("-------------------------------")  
+    new.write("\n")
+    new.write(f"Total Months: {months_total}")  
+    new.write("\n")
+    new.write(f"Total: ${total_profit:.0f}")
+    new.write("\n")
+    new.write(f"Average Change: ${avg_change:.2f}")
+    new.write("\n")
+    new.write(f"Greatest Increase in Profits: {month_list[greatest_inc_month]} (${(str(greatest_inc))})")
+    new.write("\n")
+    new.write(f"Greatest Decrease in Profits: {month_list[greatest_dec_month]} (${(str(greatest_dec))})")   
